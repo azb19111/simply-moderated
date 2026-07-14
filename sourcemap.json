@@ -1,0 +1,1 @@
+{"name":"simply-moderated","className":"DataModel","filePaths":["default.project.json"],"children":[{"name":"ReplicatedStorage","className":"ReplicatedStorage"},{"name":"StarterPlayer","className":"StarterPlayer","children":[{"name":"StarterPlayerScripts","className":"StarterPlayerScripts"}]},{"name":"ServerScriptService","className":"ServerScriptService"}]}
