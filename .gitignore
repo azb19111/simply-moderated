@@ -1,2 +1,3 @@
 *.toml
 gitignore
+sourcemap.json

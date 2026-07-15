@@ -1,0 +1,15 @@
+{
+    "name": "SimplyModerated MainModule",
+    "tree": {
+        "$path": "main/SimplyModerated MainModule.luau",
+        "client": {
+            "$path": "main/client"
+        },
+        "server": {
+            "$path": "main/server"
+        },
+        "shared": {
+            "$path": "main/shared"
+        }
+    }
+}
