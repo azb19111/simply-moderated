@@ -17,7 +17,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Trust Rojo
-        run: aftman trust rojo
+        run: aftman trust rojo-rbx/rojo
       - name: Load Rojo
         run: aftman add rojo-rbx/rojo@7.4.4
       - name: Build Main Module
