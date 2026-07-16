@@ -28,19 +28,17 @@ jobs:
         
       - name: Publish Loader
         run: |
-          curl --location --request PATCH 'https://apis.roblox.com/assets/v1/assets/${{ vars.LOADER_ID }}' \
-          --header 'x-api-key: ${{ secrets.ROBLOX_ASSETS }}' \
-          --form 'request={
-            "assetType": "Model",
-            "assetId": "${{ vars.LOADER_ID }}"
-          }' \
-          --form 'fileContent=@SimplyModerated_Loader.rbxm;type=model/x-rbxm
-      - name: Publish MainModule
+          curl --fail-with-body \
+            --location \
+            --request PATCH "https://apis.roblox.com/assets/v1/assets/${{ vars.LOADER_ID }}" \
+            --header "x-api-key: ${{ secrets.ROBLOX_ASSETS }}" \
+            --form 'request={"assetType":"Model","assetId":"${{ vars.LOADER_ID }}"}' \
+            --form "fileContent=@SimplyModerated_Loader.rbxm;type=model/x-rbxm"
+      - name: Publish Loader
         run: |
-          curl --location --request PATCH 'https://apis.roblox.com/assets/v1/assets/${{ vars.MAINMODULE_ID }}' \
-          --header 'x-api-key: ${{ secrets.ROBLOX_ASSETS }}' \
-          --form 'request={
-            "assetType": "Model",
-            "assetId": "${{ vars.MAINMODULE_ID }}"
-          }' \
-          --form 'fileContent=@SimplyModerated_MainModule.rbxm;type=model/x-rbxm'
+          curl --fail-with-body \
+          --location \
+          --request PATCH "https://apis.roblox.com/assets/v1/assets/${{ vars.LOADER_ID }}" \
+          --header "x-api-key: ${{ secrets.ROBLOX_ASSETS }}" \
+          --form 'request={"assetType":"Model","assetId":"${{ vars.LOADER_ID }}"}' \
+          --form "fileContent=@SimplyModerated_Loader.rbxm;type=model/x-rbxm"
