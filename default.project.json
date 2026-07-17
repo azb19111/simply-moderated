@@ -1,0 +1,15 @@
+{
+  "name": "simply-moderated",
+  "tree": {
+    "$className": "DataModel",
+
+    "ServerScriptService": {
+      "SimplyModerated Loader": {
+        "$path": "loader"
+      },
+      "SimplyModerated MainModule": {
+        "$path": "main"
+      }
+    }
+  }
+}
