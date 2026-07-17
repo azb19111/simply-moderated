@@ -1,0 +1,31 @@
+name: publish-pre-release
+
+# Controls when the workflow will run
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Trust Rojo
+        run: aftman trust rojo-rbx/rojo
+      - name: Load Rojo
+        run: aftman add rojo-rbx/rojo@7.4.4
+      - name: Build Pre Main Module
+        run: rojo build -o SimplyModerated_PreMainModule.rbxm main.project.json
+        
+      - name: Publish Pre MainModule
+        run: |
+          curl --fail-with-body \
+          --location \
+          --request PATCH "https://apis.roblox.com/assets/v1/assets/${{ vars.PRE_MAINMODULE_ID }}" \
+          --header "x-api-key: ${{ secrets.ROBLOX_ASSETS }}" \
+          --form 'request={"assetType":"Model","assetId":"${{ vars.PRE_MAINMODULE_ID }}"}' \
+          --form "fileContent=@SimplyModerated_PreMainModule.rbxm;type=model/x-rbxm"
