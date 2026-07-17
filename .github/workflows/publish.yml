@@ -1,0 +1,41 @@
+name: publish-release
+
+# Controls when the workflow will run
+on:
+  release:
+    types: [released]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Trust Rojo
+        run: aftman trust rojo-rbx/rojo
+      - name: Load Rojo
+        run: aftman add rojo-rbx/rojo@7.4.4
+      - name: Build Main Module
+        run: rojo build -o SimplyModerated_MainModule.rbxm main.project.json
+      - name: Build Loader
+        run: rojo build -o SimplyModerated_Loader.rbxm loader.project.json
+        
+      - name: Publish Loader
+        run: |
+          curl --fail-with-body \
+            --location \
+            --request PATCH "https://apis.roblox.com/assets/v1/assets/${{ vars.LOADER_ID }}" \
+            --header "x-api-key: ${{ secrets.ROBLOX_ASSETS }}" \
+            --form 'request={"assetType":"Model","assetId":"${{ vars.LOADER_ID }}"}' \
+            --form "fileContent=@SimplyModerated_Loader.rbxm;type=model/x-rbxm"
+      - name: Publish MainModule
+        run: |
+          curl --fail-with-body \
+          --location \
+          --request PATCH "https://apis.roblox.com/assets/v1/assets/${{ vars.MAINMODULE_ID }}" \
+          --header "x-api-key: ${{ secrets.ROBLOX_ASSETS }}" \
+          --form 'request={"assetType":"Model","assetId":"${{ vars.MAINMODULE_ID }}"}' \
+          --form "fileContent=@SimplyModerated_MainModule.rbxm;type=model/x-rbxm"
