@@ -2,11 +2,8 @@ name: publish-release
 
 # Controls when the workflow will run
 on:
-  push:
-    branches:
-      - release
-    
-  workflow_dispatch:
+  release:
+    types: [released]
 
 jobs:
   publish:
