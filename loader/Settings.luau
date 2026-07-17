@@ -8,6 +8,6 @@
 --]]
 local Settings = { }
 
--- Settings area missing.
+Settings.LoadPreRelease = false -- Load a prerelease for the MainModule? THIS MIGHT BE UNSTABLE! 
 
 return Settings
