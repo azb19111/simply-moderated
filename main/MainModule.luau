@@ -16,7 +16,8 @@ local ROBLOX_PRINT = print
 local CONTEXT -- This is set once in the INIT function.
 local SETTINGS -- This is set once in the INIT function.
 local LOADER_VERSION -- This is set once in the INIT function.
-local VERSION -- This is set up once in the INIT function.
+local VERSION -- This is set once in the INIT function.
+local STORAGE -- This is set once in the INIT function.
 
 --- FUNCS ---
 local error -- This is set once in the INIT function.
@@ -33,8 +34,8 @@ local function INIT(context)
     warn = statics.warn
     error = statics.error
     LOADER_VERSION = statics.LOADER_VERSION
-    VERSION = script:FindFirstChild('server'):FindFirstChild('V').Value
-    log(CONTEXT)
+    VERSION = script.Parent:FindFirstChild('V').Value
+    log('Full context: ', CONTEXT)
 end
 
 --- CODE ---
