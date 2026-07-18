@@ -33,7 +33,7 @@ local error = function(...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : unknown : Could not create an error!', result)
+        ROBLOX_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : unknown : Could not create an error!', result, ...)
     end
     
 end
@@ -43,7 +43,7 @@ local warn = function(...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a warning!', result)
+        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a warning!', result, ...)
     end
 end
 local print = function(...)
@@ -52,7 +52,7 @@ local print = function(...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a print!', result)
+        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a print!', result, ...)
     end
 end
 local log = function(...)
@@ -64,7 +64,7 @@ local log = function(...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a log!', result)
+        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a log!', result, ...)
     end
 end
 
@@ -79,7 +79,7 @@ else
     VERSION_USED = 'v? pre?dev?'
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
     local success, result = pcall(function(...)
-        if script.Parent:FindFirstChild('Settings').LoadPreRelease then
+        if require(script.Parent:FindFirstChild('Settings')).LoadPreRelease then
             require(MAIN_MODULE_PRE_ID)(CONTEXT)
         else
             require(MAIN_MODULE_ID)(CONTEXT)
