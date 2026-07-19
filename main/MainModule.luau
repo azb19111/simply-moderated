@@ -34,7 +34,7 @@ local function INIT(context)
     warn = statics.warn
     error = statics.error
     LOADER_VERSION = statics.LOADER_VERSION
-    VERSION = script.Parent:FindFirstChild('V').Value
+    VERSION = script:FindFirstChild('V').Value
     log('Full context: ', CONTEXT)
 end
 
