@@ -22,7 +22,7 @@ local DEBUG = if ENV == 'Studio' and if LOCAL_VERSION then string.find(LOCAL_VER
 local LOAD_LOCAL = if LOCAL_VERSION and not string.find(LOCAL_VERSION, 'dev') or LOCAL_VERSION and DEBUG then true else false
 local ROBLOX_WARN = warn
 local ROBLOX_PRINT = print
-local VERSION_USED = '' -- This is set once in the loading process.
+local _VERSION_USED = '' -- This is set once in the loading process.
 local MAIN_MODULE_ID = 110934653842466
 local MAIN_MODULE_PRE_ID = 123843391437105
 
@@ -73,6 +73,7 @@ local CONTEXT = {Settings = require(script.Parent:FindFirstChild('Settings')), S
 --- CODE ---
 if LOAD_LOCAL then
     VERSION_USED = 'v'..LOADER_VERSION
+    log('Loading local module ...')
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
     require(ServerScriptService:FindFirstChild('SimplyModerated MainModule'):FindFirstChild('MainModule'))(CONTEXT)
 else
@@ -80,8 +81,10 @@ else
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
     local success, result = pcall(function(...)
         if require(script.Parent:FindFirstChild('Settings')).LoadPreRelease then
+            log('Loading PreRelease module ...')
             require(MAIN_MODULE_PRE_ID)(CONTEXT)
         else
+            log('Loading module ...')
             require(MAIN_MODULE_ID)(CONTEXT)
         end
     end)
