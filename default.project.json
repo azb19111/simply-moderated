@@ -7,8 +7,20 @@
       "SimplyModerated Loader": {
         "$path": "loader"
       },
-      "SimplyModerated MainModule": {
-        "$path": "main"
+      "MainModule" : {
+        "$path": "main/MainModule.luau",
+        "client": {
+          "$path": "main/client"
+        },
+        "server": {
+          "$path": "main/server"
+        },
+        "shared": {
+          "$path": "main/shared"
+        },
+        "V": {
+          "$path": "main/V.txt"
+        }
       }
     }
   }

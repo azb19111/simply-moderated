@@ -1,7 +1,18 @@
 {
-    "name": "SimplyModerated MainModule",
+    "name": "MainModule",
     "tree": {
-       "$className": "Folder",
-       "$path": "main"
+        "$path": "main/MainModule.luau",
+        "client": {
+            "$path": "main/client"
+        },
+        "server": {
+            "$path": "main/server"
+        },
+        "shared": {
+            "$path": "main/shared"
+        },
+        "V": {
+            "$path": "main/V.txt"
+        }
     }
 }
