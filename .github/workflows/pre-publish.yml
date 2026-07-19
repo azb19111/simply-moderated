@@ -4,6 +4,7 @@ name: publish-pre-release
 on:
   release:
     types: [published]
+  workflow_dispatch: 
 
 jobs:
   publish:
