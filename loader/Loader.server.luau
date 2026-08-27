@@ -16,7 +16,7 @@ local ServerScriptService = game:GetService('ServerScriptService')
 
 --- STATICS ---
 local ENV = if RunService:IsStudio() then 'Studio' else 'Production'
-local LOADER_VERSION = '0.0.1dev'
+local LOADER_VERSION = '0.0.1dev2'
 local LOCAL_VERSION = if ServerScriptService:FindFirstChild('MainModule') then if ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V') then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value else nil else nil
 local DEBUG = if ENV == 'Studio' and if LOCAL_VERSION then string.find(LOCAL_VERSION, 'dev') or string.find(LOCAL_VERSION, 'pre') else false then true else false
 local LOAD_LOCAL = if LOCAL_VERSION and not string.find(LOCAL_VERSION, 'dev') or LOCAL_VERSION and DEBUG then true else false
