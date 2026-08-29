@@ -19,7 +19,9 @@ local ROBLOX_WARN = warn
 local ROBLOX_PRINT = print
 local CONTEXT -- This is set once in the INIT function.
 local SETTINGS -- This is set once in the INIT function.
+local SETTINGS_PROTOCOL -- This is set once in the INIT function.
 local LOADER_VERSION -- This is set once in the INIT function.
+local LOADER_PROTOCOL -- This is set once in the INIT function.
 local VERSION -- This is set once in the INIT function.
 local STORAGE -- This is set once in the INIT function. SET IT
 local SHARED = script:FindFirstChild('shared')
@@ -149,12 +151,14 @@ end
 local function init(context)
     CONTEXT = context
     SETTINGS = context.Settings
+    SETTINGS_PROTOCOL = context.Settings.SETTINGS_PROTOCOL
     local statics = context.Statics
     log = statics.log
     print = statics.print
     warn = statics.warn
     error = statics.error
     LOADER_VERSION = statics.LOADER_VERSION
+    LOADER_PROTOCOL = statics.LOADER_PROTOCOL
     VERSION = script:FindFirstChild('V').Value
     log('Full context from loader: ', CONTEXT)
 
