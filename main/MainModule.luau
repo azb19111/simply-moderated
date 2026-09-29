@@ -173,11 +173,11 @@ local function init(context)
 
     CONTEXT.Statics.HTTP = HttpService.HttpEnabled
     CONTEXT.Statics.USE_DATA_STORE = true
-    if not Settings.DataStoreName then
+    if not Settings.DataStoreName or Settings.DataStoreName == '' then
         warn('Set Settings.DataStoreName! Not using DataStore for this session ..')
         CONTEXT.Statics.USE_DATA_STORE = false
     end
-    if not Settings.DataStoreKey then
+    if not Settings.DataStoreKey or Settings.DataStoreKey == '' then
         warn('Set Settings.DataStoreKey! Not using DataStore for this session ..')
         CONTEXT.Statics.USE_DATA_STORE = false
     end
