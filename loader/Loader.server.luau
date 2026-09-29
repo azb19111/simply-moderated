@@ -24,8 +24,8 @@ local LOAD_LOCAL = if LOCAL_VERSION and not string.find(LOCAL_VERSION, 'dev') or
 local ROBLOX_WARN = warn
 local ROBLOX_PRINT = print
 local _VERSION_USED = '' -- This is set once in the loading process.
-local MAIN_MODULE_ID = 110934653842466
-local MAIN_MODULE_PRE_ID = 123843391437105
+--local MAIN_MODULE_ID = 110934653842466
+--local MAIN_MODULE_PRE_ID = 123843391437105
 
 --- FUNCS ---
 local error = function(...)
@@ -78,18 +78,20 @@ if LOAD_LOCAL then
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
     require(ServerScriptService:FindFirstChild('MainModule'))(CONTEXT)
 else
-    VERSION_USED = 'v? pre?dev?'
-    warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
-    local success, result = pcall(function(...)
-        if require(script.Parent:FindFirstChild('Settings')).LoadPreRelease then
-            log('Loading PreRelease module ...')
-            require(MAIN_MODULE_PRE_ID)(CONTEXT)
-        else
-            log('Loading module ...')
-            require(MAIN_MODULE_ID)(CONTEXT)
-        end
-    end)
-    if not success then
-        error('Could not load MainModule!', result)
-    end
+    error('Since Roblox does not like automatic asset uploading, the asset version has been discontiniued.')
+    return
+    --VERSION_USED = 'v? pre?dev?'
+    --warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
+    --local success, result = pcall(function(...)
+    --    if require(script.Parent:FindFirstChild('Settings')).LoadPreRelease then
+    --        log('Loading PreRelease module ...')
+    --        require(MAIN_MODULE_PRE_ID)(CONTEXT)
+    --    else
+    --        log('Loading module ...')
+    --        require(MAIN_MODULE_ID)(CONTEXT)
+    --    end
+    --end)
+    --if not success then
+    --    error('Could not load MainModule!', result)
+    --end
 end
