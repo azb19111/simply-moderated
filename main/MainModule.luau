@@ -8,8 +8,6 @@
 --]]
 
 --- SERVICES ---
-local DataStoreService = game:GetService("DataStoreService")
-local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService('ServerScriptService')
 local Settings = require(ServerScriptService["SimplyModerated Loader"].Settings)
@@ -159,7 +157,7 @@ local function init(context)
     error = statics.error
     LOADER_VERSION = statics.LOADER_VERSION
     LOADER_PROTOCOL = statics.LOADER_PROTOCOL
-    VERSION = script:FindFirstChild('V').Value
+    VERSION = require(script:FindFirstChild('V'))
     log('Full context from loader: ', CONTEXT)
 
     script.Parent = ServerScriptService
@@ -171,7 +169,7 @@ local function init(context)
     CLIENT.Parent = script
     log('Parenting complete.')
 
-    CONTEXT.Statics.HTTP = HttpService.HttpEnabled
+    --CONTEXT.Statics.HTTP = HttpService.HttpEnabled
     CONTEXT.Statics.USE_DATA_STORE = true
     if not Settings.DataStoreName then
         warn('Set Settings.DataStoreName! Not using DataStore for this session ..')
@@ -186,7 +184,7 @@ local function init(context)
         CONTEXT.Statics.USE_DATA_STORE = false
     end
     if CONTEXT.Statics.USE_DATA_STORE then
-        CONTEXT.Statics.DATA_STORE = DataStoreService:GetDataStore(Settings.DataStoreName)
+        --CONTEXT.Statics.DATA_STORE = DataStoreService:GetDataStore(Settings.DataStoreName)
     else
         CONTEXT.Statics.DATA_STORE = nil
     end

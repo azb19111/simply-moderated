@@ -1,7 +1,0 @@
-{
-  "name": "SimplyModerated Loader",
-  "tree": {
-    "$className": "Model",
-    "$path": "loader"
-  }
-}

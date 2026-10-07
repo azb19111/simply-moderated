@@ -18,42 +18,40 @@ local ServerScriptService = game:GetService('ServerScriptService')
 local ENV = if RunService:IsStudio() then 'Studio' else 'Production'
 local LOADER_VERSION = '0.0.1dev'
 local LOADER_PROTOCOL = 0
-local LOCAL_VERSION = if ServerScriptService:FindFirstChild('MainModule') then if ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V') then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value else nil else nil
+local LOCAL_VERSION = if ServerScriptService:FindFirstChild('MainModule') then if ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V') then require(ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V')) else nil else nil
 local DEBUG = if ENV == 'Studio' and if LOCAL_VERSION then string.find(LOCAL_VERSION, 'dev') or string.find(LOCAL_VERSION, 'pre') else false then true else false
 local LOAD_LOCAL = if LOCAL_VERSION and not string.find(LOCAL_VERSION, 'dev') or LOCAL_VERSION and DEBUG then true else false
-local ROBLOX_WARN = warn
-local ROBLOX_PRINT = print
+local REAL_WARN = warn
+local REAL_PRINT = print
 local _VERSION_USED = '' -- This is set once in the loading process.
---local MAIN_MODULE_ID = 110934653842466
---local MAIN_MODULE_PRE_ID = 123843391437105
 
 --- FUNCS ---
 local error = function(...)
     local output = function(...)
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : '..if RunService:IsServer() then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value..' :' else 'CLIENT :', ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : '..if RunService:IsServer() then require(ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V'))..' :' else 'CLIENT :', ...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : unknown : Could not create an error!', result, ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: ::  ERROR  :: : unknown : Could not create an error!', result, ...)
     end
     
 end
 local warn = function(...)
     local output = function(...)
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : '..if RunService:IsServer() then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value..' :' else 'CLIENT :', ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : '..if RunService:IsServer() then require(ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V'))..' :' else 'CLIENT :', ...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a warning!', result, ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a warning!', result, ...)
     end
 end
 local print = function(...)
     local output = function(...)
-        ROBLOX_PRINT('::: SIMPLY MODERATED ::: ::  PRINT  :: : '..if RunService:IsServer() then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value..' :' else 'CLIENT :', ...)
+        REAL_PRINT('::: SIMPLY MODERATED ::: ::  PRINT  :: : '..if RunService:IsServer() then require(ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V'))..' :' else 'CLIENT :', ...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a print!', result, ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a print!', result, ...)
     end
 end
 local log = function(...)
@@ -61,15 +59,15 @@ local log = function(...)
         return
     end
     local output = function(...)
-        ROBLOX_PRINT('::: SIMPLY MODERATED ::: ::  DEBUG  :: : '..if RunService:IsServer() then ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V').Value..' :' else 'CLIENT :', ...)
+        REAL_PRINT('::: SIMPLY MODERATED ::: ::  DEBUG  :: : '..if RunService:IsServer() then require(ServerScriptService:FindFirstChild('MainModule'):FindFirstChild('V'))..' :' else 'CLIENT :', ...)
     end
     local success, result = pcall(output, ...)
     if not success then
-        ROBLOX_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a log!', result, ...)
+        REAL_WARN('::: SIMPLY MODERATED ::: :: WARNING :: : unknown : Could not create a log!', result, ...)
     end
 end
 
-local CONTEXT = {Settings = require(script.Parent:FindFirstChild('Settings')), Statics = {LOADER_VERSION = LOADER_VERSION, LOADER_PROTOCOL = LOADER_PROTOCOL, DEBUG = DEBUG, error = error, warn = warn, print = print, log = log}}
+local CONTEXT = {Settings = require(script:FindFirstChild('Settings')), Statics = {LOADER_VERSION = LOADER_VERSION, LOADER_PROTOCOL = LOADER_PROTOCOL, DEBUG = DEBUG, error = error, warn = warn, print = print, log = log}}
 
 --- CODE ---
 if LOAD_LOCAL then
@@ -78,20 +76,5 @@ if LOAD_LOCAL then
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
     require(ServerScriptService:FindFirstChild('MainModule'))(CONTEXT)
 else
-    error('Since Roblox does not like automatic asset uploading, the asset version has been discontiniued.')
-    return
-    --VERSION_USED = 'v? pre?dev?'
-    --warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
-    --local success, result = pcall(function(...)
-    --    if require(script.Parent:FindFirstChild('Settings')).LoadPreRelease then
-    --        log('Loading PreRelease module ...')
-    --        require(MAIN_MODULE_PRE_ID)(CONTEXT)
-    --    else
-    --        log('Loading module ...')
-    --        require(MAIN_MODULE_ID)(CONTEXT)
-    --    end
-    --end)
-    --if not success then
-    --    error('Could not load MainModule!', result)
-    --end
+    error('No local module found!')
 end
