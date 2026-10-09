@@ -148,8 +148,8 @@ end
 
 local function init(context)
     CONTEXT = context
-    SETTINGS = context.Settings
-    SETTINGS_PROTOCOL = context.Settings.SETTINGS_PROTOCOL
+    SETTINGS = context.Settings or require(ServerScriptService:FindFirstChild('SimplyModerated Loader'):FindFirstChild('Settings'))
+    SETTINGS_PROTOCOL = SETTINGS.SETTINGS_PROTOCOL
     local statics = context.Statics
     log = statics.log
     print = statics.print
@@ -241,3 +241,4 @@ end
 --- CODE ---
 
 return init
+

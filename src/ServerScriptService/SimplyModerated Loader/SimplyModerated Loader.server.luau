@@ -74,7 +74,7 @@ if LOAD_LOCAL then
     VERSION_USED = 'v'..LOADER_VERSION
     log('Loading local module ...')
     warn('Attention! This admin is not ready for production! Expect frequent crashes, bugs and updates you have to install manually.')
-    require(ServerScriptService:FindFirstChild('MainModule'))(CONTEXT)
+    require(ServerScriptService:FindFirstChild('MainModule'))
 else
     error('No local module found!')
 end

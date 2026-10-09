@@ -1,0 +1,8 @@
+{
+  "ambient_color": [0.99999994, 0.99999994, 0.99999994],
+  "brightness": 2000,
+  "sun_color": [0.99999994, 0.99999994, 0.99999994],
+  "sun_illuminance": 8000,
+  "sun_shadows": true,
+  "sun_rotation": [-69.444, 30.3364, 53.4075]
+}

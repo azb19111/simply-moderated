@@ -1,0 +1,18 @@
+{
+  "position": [0, -2, 0],
+  "size": [255, 4, 255],
+  "color": "#646464",
+  "material": "SmoothPlastic",
+  "baseplate": true,
+  "textures": [
+    {
+      "face": "Top",
+      "kind": "Studs"
+    },
+    {
+      "face": "Bottom",
+      "kind": "Inlets"
+    }
+  ],
+  "editor_collapsed": true
+}

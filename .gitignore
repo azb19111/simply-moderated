@@ -2,3 +2,6 @@
 gitignore
 sourcemap.json
 aftman.toml
+.vortexsync/
+.vrtx-backups/
+/game.vrtx
